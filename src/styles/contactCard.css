@@ -1,20 +1,19 @@
 body {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 14px
 }
 
 .imageContact {
-    color : green;
-    alt: "This is an image";
-    clip-path: circle(50%);
     max-width: 200px;
     max-height: 200px;
+    clip-path: circle(50%);
 }
 
 .infoContact {
-    color: rgb(48, 48, 47);
+    color: rgb(85, 85, 84);
 }
 
-.infoContact.nameContact {
-    color: rgb(31, 31, 31);
+.container > .infoContact > .nameContact {
+    color: rgb(44, 44, 43);
     font-size: 16px;
 }

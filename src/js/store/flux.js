@@ -1,9 +1,9 @@
+import { container } from "webpack";
+
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			contactList: [
-				
-			],
+			contactList: [],
 
 			demo: [
 				{
@@ -20,6 +20,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
+	
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
 			},
@@ -32,12 +33,29 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({contactList: data.contacts})
 			},
 
-			saveContact: async() =>{
+			saveContact: async(contactData) =>{
+				// Validando campos antes de enviarlos
+				if (!contactData.name || !contactData.email || !contactData.phone || !contactData.address) {
+					console.error("All fields are required.");
+					return;
+				}
 				const response = await fetch ("https://playground.4geeks.com/contact/agendas/agendasCarlos/contacts", {
-					method: "POST"
+					method: "POST",
+					body: JSON.stringify(contactData),
+					headers: {
+						"Content-Type": "application/json"
+					}
 				})
-				const data = await response.jason();
+				getActions().loadContacts();
+			},
+
+			deleteContact: async(id) =>{
+				const response = await fetch ("https://playground.4geeks.com/contact/agendas/agendasCarlos/" + id, {
+					method: "DELETE",
+				})
+				const data = await response.json();
 				setStore({contactList: data.contacts})
+				console.log("Usuario borrado")
 			},
 
 			loadSomeData: () => {

@@ -8,6 +8,7 @@ import { Single } from "./views/single";
 import injectContext from "./store/appContext";
 
 import FormNewContact from "./views/form";
+import EditContact from "./component/editContact";
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 
@@ -28,6 +29,7 @@ const Layout = () => {
 						<Route path="/single/:theid" element={<Single />} />
 						<Route path="*" element={<h1>Not found!</h1>} />
 						<Route path="/new-contact" element={<FormNewContact  />} />
+						<Route path="/edit-contact" element={<EditContact  />} />
 					</Routes>
 					<Footer />
 				</ScrollToTop>

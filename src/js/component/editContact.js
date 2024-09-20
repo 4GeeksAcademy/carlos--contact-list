@@ -3,20 +3,19 @@ import { Link } from "react-router-dom";
 
 import { Context } from "../store/appContext";
 
-const FormNewContact = () => {
+
+const EditContact = () => {
 
     const { store, actions } = useContext(Context);
     
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [phone, setPhone] = useState('');
-    const [address, setAddress] = useState('');
+    const [name, setName] = useState(name);
+    const [email, setEmail] = useState(email);
+    const [phone, setPhone] = useState(phone);
+    const [address, setAddress] = useState(address);
 
-    
-
-    return(
+    return (
         <div className="container justify-content-center">
-            <h1>Add a new contact</h1>
+            <h1>Edit a contact</h1>
             <div className="input-group mb-3">
                 <span className="input-group-text" id="basic-addon1">Full name</span>
                 <input type="text" 
@@ -52,14 +51,14 @@ const FormNewContact = () => {
 
             <div>
                 <button className="saveContact btn btn-success w-100" 
-                    onClick={() => actions.saveContact({
+                    onClick={() => actions.editOneContact({
                         name: name,
                         email: email,
                         phone: phone,
                         address: address
                     })}
                 >
-                    Save
+                    Update
                 </button>
                 <p>
                     <Link to="/">
@@ -72,4 +71,4 @@ const FormNewContact = () => {
     )
 }
 
-export default FormNewContact;
+export default EditContact;

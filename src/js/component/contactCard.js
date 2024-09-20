@@ -1,19 +1,20 @@
 import React from "react";
 import "../../styles/contactCard.css";
+import { useNavigate } from "react-router";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEdit, faLocation, faLocationPin, faMailBulk, faPhone, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faEdit, faLocationPin, faMailBulk, faPhone, faTrash } from "@fortawesome/free-solid-svg-icons";
+
+import { useContext } from "react";
+import { Context } from "../store/appContext";
 
 
 
-const ContactCard = ({ name, address, phone, email }) => {
+const ContactCard = ({ id, name, email, phone, address  }) => {
     
-    const handleDeleteClic = () => {
-        if(deleteContact) {
-            deleteContact();
-        } else {
-            console.error("deleteContact function is not defined");
-        }
-    };
+    const { store, actions } = useContext(Context);
+
+    const navigate = useNavigate();
 
     return (
         <div className = "container border border-dark-subtle d-flex gap-3 justify-content-between p-3 col-12">
@@ -29,8 +30,10 @@ const ContactCard = ({ name, address, phone, email }) => {
                 <p className="emailContact"> <FontAwesomeIcon icon={faMailBulk} className="mx-2 justify-content-start"></FontAwesomeIcon>{email}</p>
             </div>
             <div className="edit d-flex flex justify-content-end col-3" >
-                <FontAwesomeIcon icon={faEdit} className="editIcon mx-4" />
-                <FontAwesomeIcon icon={faTrash} onClick={handleDeleteClic} className="deleteIcon mx-4"/> 
+                <FontAwesomeIcon icon={faEdit} className="editIcon mx-4" 
+                    onClick={() => navigate("/edit-contact")}/>
+                <FontAwesomeIcon icon={faTrash} className="deleteIcon mx-4" 
+                    onClick={() => actions.deleteContact(id)} /> 
             </div>
         </div>
     )

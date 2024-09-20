@@ -1,4 +1,5 @@
 import { container } from "webpack";
+import EditContact from "../component/editContact";
 
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
@@ -30,7 +31,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					method: "GET"
 				})
 				const data = await response.json();
-				setStore({contactList: data.contacts})
+				setStore({contactList: data.contacts});
 			},
 
 			saveContact: async(contactData) =>{
@@ -50,12 +51,32 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			deleteContact: async(id) =>{
-				const response = await fetch ("https://playground.4geeks.com/contact/agendas/agendasCarlos/" + id, {
+				try{
+					const response = await fetch ("https://playground.4geeks.com/contact/agendas/agendasCarlos/contacts/" + id, {
 					method: "DELETE",
+					});
+					if(response.ok) {
+						console.log("Usuario borrado")
+						getActions().loadContacts();
+					} else {
+						console.error("Error al eliminar contactro")
+					}
+				} catch (error) {
+					console.error("Error en la eliminación del contacto:", error);
+				}	
+			},
+
+			editOneContact: async (id, contactData) => {
+				const response = await fetch ("https://playground.4geeks.com/contact/agendas/agendasCarlos/contacts/" + id, {
+					method: "PUT",
+					body: JSON.stringify(id, contactData)
 				})
-				const data = await response.json();
-				setStore({contactList: data.contacts})
-				console.log("Usuario borrado")
+				if (response.ok) {
+					const data = await response.json()
+					getActions().saveContact();
+				} else {
+					console.errer("El contacto no fue actualizado")
+				};	
 			},
 
 			loadSomeData: () => {

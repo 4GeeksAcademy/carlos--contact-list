@@ -1,14 +1,17 @@
-import React, { StrictMode, useEffect } from "react";
+import React, { StrictMode, useEffect, useContext } from "react";
 import "../../styles/home.css";
 import ContactCard from "../component/contactCard.js"
 import { Context } from "../store/appContext";
-import { useContext } from "react";
-import { useActionData } from "react-router";
+
 
 
 export const Home = () => {
 	
-	const {store} = useContext(Context);
+	const {store, actions } = useContext(Context);
+
+	useEffect(() => {
+		actions.loadContacts();
+	}, []);
 
 	return (
 		<div className="text-center mt-5">
@@ -17,11 +20,11 @@ export const Home = () => {
 					return (
 						<div className="component" key= {item.id}>
 							<ContactCard 
+								id = {item.id}
 								name= {item.name}
 								address= {item.address}
 								phone= {item.phone}
 								email= {item.email}
-								deleteContact={() => deleteContact(item.id)}
 							/>
 						</div>
 					)

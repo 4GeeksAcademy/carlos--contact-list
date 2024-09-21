@@ -31,7 +31,7 @@ const ContactCard = ({ id, name, email, phone, address  }) => {
             </div>
             <div className="edit d-flex flex justify-content-end col-3" >
                 <FontAwesomeIcon icon={faEdit} className="editIcon mx-4" 
-                    onClick={() => navigate("/edit-contact")}/>
+                    onClick={() => navigate("/edit-contact/:id")}/>
                 <FontAwesomeIcon icon={faTrash} className="deleteIcon mx-4" 
                     onClick={() => actions.deleteContact(id)} /> 
             </div>

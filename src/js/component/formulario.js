@@ -12,7 +12,11 @@ const FormNewContact = () => {
     const [phone, setPhone] = useState('');
     const [address, setAddress] = useState('');
 
-    
+    const clearForm = () => {
+        setName("");
+        setEmail("");
+        setPhone("");
+        setAddress("")};
 
     return(
         <div className="container justify-content-center">
@@ -51,14 +55,17 @@ const FormNewContact = () => {
             </div>
 
             <div>
-                <button className="saveContact btn btn-success w-100" 
-                    onClick={() => actions.saveContact({
+                <button 
+                    className="saveContact btn btn-success w-100" 
+                    onClick={() => {
+                        actions.saveContact({
                         name: name,
                         email: email,
                         phone: phone,
                         address: address
-                    })}
-                >
+                    });
+                    clearForm();
+                    }}>
                     Save
                 </button>
                 <p>

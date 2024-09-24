@@ -1,11 +1,13 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { Context } from "../store/appContext";
 
 
 const EditContact = () => {
 
+    const navigate = useNavigate();
     const { store, actions } = useContext(Context);
 
     const { id } = useParams();
@@ -64,12 +66,12 @@ const EditContact = () => {
 
             <div>
                 <button className="editContact btn btn-success w-100" 
-                    onClick={() => actions.editOneContact({
+                    onClick={() => {actions.editOneContact({
                         name: name,
                         email: email,
                         phone: phone,
                         address: address
-                    }, id)}
+                    }, id); navigate("/")}}
                 >
                     Update
                 </button>

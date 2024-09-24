@@ -85,11 +85,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-			loadSomeData: () => {
-				/**
-					fetch().then().then(data => setStore({ "foo": data.bar }))
-				*/
+			createUser: async () => {
+				const response = await fetch("https://playground.4geeks.com/contact/agendas/agendasCarlos", {
+					method: "POST"
+				})
 			},
+
 			changeColor: (index, color) => {
 				//get the store
 				const store = getStore();

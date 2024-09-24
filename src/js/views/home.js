@@ -6,9 +6,12 @@ import { Context } from "../store/appContext";
 
 
 export const Home = () => {
+
 	
 	const {store, actions } = useContext(Context);
 
+	actions.createUser();
+	
 	useEffect(() => {
 		actions.loadContacts();
 	}, []);

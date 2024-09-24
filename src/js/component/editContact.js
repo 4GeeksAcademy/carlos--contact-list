@@ -7,14 +7,16 @@ import { Context } from "../store/appContext";
 const EditContact = () => {
 
     const { store, actions } = useContext(Context);
+
     const { id } = useParams();
+
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState("");
     const [address, setAddress] = useState("");
 
     useEffect(() => {
-        const contactToEdit = store.contactList.find(item => item.id === parseInt(id));
+        const contactToEdit = store.contactList.find(contact => contact.id === parseInt(id));
         if(contactToEdit)
         {
             setName(contactToEdit.name);
@@ -22,7 +24,7 @@ const EditContact = () => {
             setEmail(contactToEdit.email);
             setAddress(contactToEdit.address)
         }  
-    }, [store.contactList, id]);
+    }, [id]);
 
     return (
         <div className="container justify-content-center">
@@ -67,7 +69,7 @@ const EditContact = () => {
                         email: email,
                         phone: phone,
                         address: address
-                    })}
+                    }, id)}
                 >
                     Update
                 </button>

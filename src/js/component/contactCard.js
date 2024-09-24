@@ -23,15 +23,15 @@ const ContactCard = ({ id, name, email, phone, address  }) => {
                     src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8mcdA_uoJahxn3PQ-IC9WROV-GF2wuTl2FQ&s" 
                     alt="contact_image.jpg"/>
             </div>
-            <div className= "infoContact">
-                <strong className="nameContact ">{name}</strong>
-                <p className="addressContact"><FontAwesomeIcon icon={faLocationPin} className="mx-2 justify-content-start"/>{address}</p>
-                <p className="phoneContact"><FontAwesomeIcon icon={faPhone} className="mx-2 justify-content-start"></FontAwesomeIcon>{phone}</p>
-                <p className="emailContact"> <FontAwesomeIcon icon={faMailBulk} className="mx-2 justify-content-start"></FontAwesomeIcon>{email}</p>
+            <div className= "infoContact d-flex flex-column col-5 justify-content-start my-3">
+                <strong className="nameContact mx-2 my-2 d-flex justify-content-start">{name}</strong>
+                <p className="addressContact mx-2 d-flex align-items-center"><FontAwesomeIcon icon={faLocationPin} className="mx-2 d-flex justify-content-start"/>{address}</p>
+                <p className="phoneContact mx-2 d-flex align-items-center"><FontAwesomeIcon icon={faPhone} className="mx-2 d-flex justify-content-start"></FontAwesomeIcon>{phone}</p>
+                <p className="emailContact mx-2 d-flex align-items-center"> <FontAwesomeIcon icon={faMailBulk} className="mx-2 d-flex justify-content-start"></FontAwesomeIcon>{email}</p>
             </div>
             <div className="edit d-flex flex justify-content-end col-3" >
                 <FontAwesomeIcon icon={faEdit} className="editIcon mx-4" 
-                    onClick={() => navigate("/edit-contact/:id")}/>
+                    onClick={() => navigate("/edit-contact/" + id)}/>
                 <FontAwesomeIcon icon={faTrash} className="deleteIcon mx-4" 
                     onClick={() => actions.deleteContact(id)} /> 
             </div>

@@ -66,17 +66,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}	
 			},
 
-			editOneContact: async (contactData) => {
+			editOneContact: async (contactData, id) => {
 				try {
 					const response = await fetch ("https://playground.4geeks.com/contact/agendas/agendasCarlos/contacts/" + id, {
 						method: "PUT",
 						body: JSON.stringify(contactData),
-					});
+						headers: {
+						"Content-Type": "application/json"
+					}});
 					if (response.ok) {
 						await getActions().loadContacts();
 						console.log("Contacto actualizado")
 					} else {
-						console.errer("El contacto no fue actualizado")
+						console.error("El contacto no fue actualizado")
 					}
 				} catch (error) {
 					console.error("Error en la actualización del contacto", error);
